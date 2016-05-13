@@ -1,8 +1,3 @@
-function Comment_focus(postid)
-{
-	document.getElementById(postid).focus();
-}
-
 function post_name_underLine(pid)
 {
 	document.getElementById("uname"+pid).style.textDecoration = "underline";

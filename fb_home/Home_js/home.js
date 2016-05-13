@@ -1,61 +1,18 @@
-function blank_post_check()
+function capital_post_txt()
 {
-	var post=document.posting_txt.post_txt.value;
-	if(post=="")
-	{
-		return false;
-	}
-	return true;
+	document.posting_txt.post_txt.style.textTransform="capitalize";
 }
 		
-function upload_open()
+function capital_post_pic_txt()
 {
-	document.getElementById("post_pic").style.display='block';
-	document.getElementById("post_txt").style.display='none';
+	document.posting_pic.post_txt.style.textTransform="capitalize";
 }
 		
-function upload_close()
-{
-	document.getElementById("post_txt").style.display='block';
-	document.getElementById("post_pic").style.display='none';
-}
-				
-function Img_check()
-{
-	var file = document.getElementById('img');
-	var fileName = file.value;
-	var ext = fileName.slice(fileName.length-4,fileName.length);
-	if(fileName=="")
-	{
-		return false;
-	}
-	else
-	{
-		if(ext!=".jpg" && ext!=".JPG" && ext!=".png" && ext!=".PNG" && ext!=".gif" && ext!=".GIF" && ext!=".jpeg" && ext!=".JPEG")
-		{
-			document.getElementById("photo_erorr").style.display='block';
-			document.getElementById("body").style.overflow="hidden";
-			return false;
-		}
-	}
-	document.getElementById("photo_erorr").style.display='none';
-	document.getElementById("body").style.overflow="visible";
-	return true;
-}
-function Comment_focus(postid)
-{
-	document.getElementById(postid).focus();
-}
-function hide_photo_erorr()
-{
-	document.getElementById("photo_erorr").style.display='none';
-	document.getElementById("body").style.overflow="visible";
-}
-
 function post_name_underLine(pid)
 {
 	document.getElementById("uname"+pid).style.textDecoration = "underline";
 }
+
 function post_name_NounderLine(pid)
 {
 	document.getElementById("uname"+pid).style.textDecoration = "none"
@@ -68,15 +25,6 @@ function like_underLine(pid)
 function like_NounderLine(pid)
 {
 	document.getElementById("like"+pid).style.textDecoration = "none"
-}
-
-function unlike_underLine(pid)
-{
-	document.getElementById("unlike"+pid).style.textDecoration = "underline";
-}
-function unlike_NounderLine(pid)
-{
-	document.getElementById("unlike"+pid).style.textDecoration = "none"
 }
 
 function Comment_underLine(pid)

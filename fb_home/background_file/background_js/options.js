@@ -7,31 +7,15 @@
 		document.getElementById("option").style.display='none';
 	}
 	
-	function head_timeline_over()
+	function head_new_over()
 	{
-		document.getElementById("head_timeline").style.textDecoration = "underline"
+		document.getElementById("head_new").style.textDecoration = "underline"
 	}
-	function head_timeline_out()
+	function head_new_out()
 	{
-		document.getElementById("head_timeline").style.textDecoration = "none"
+		document.getElementById("head_new").style.textDecoration = "none"
 	}
 	
-	function head_about_over()
-	{
-		document.getElementById("head_about").style.textDecoration = "underline"
-	}
-	function head_about_out()
-	{
-		document.getElementById("head_about").style.textDecoration = "none"
-	}
-	function head_photos_over()
-	{
-		document.getElementById("head_photos").style.textDecoration = "underline"
-	}
-	function head_photos_out()
-	{
-		document.getElementById("head_photos").style.textDecoration = "none"
-	}
 	function head_settings_over()
 	{
 		document.getElementById("head_settings").style.textDecoration = "underline"
@@ -40,6 +24,25 @@
 	{
 		document.getElementById("head_settings").style.textDecoration = "none"
 	}
+	
+	function head_g_chat_over()
+	{
+		document.getElementById("head_g_chat").style.textDecoration = "underline"
+	}
+	function head_g_chat_out()
+	{
+		document.getElementById("head_g_chat").style.textDecoration = "none"
+	}
+	
+	function head_notice_over()
+	{
+		document.getElementById("head_notice").style.textDecoration = "underline"
+	}
+	function head_notice_out()
+	{
+		document.getElementById("head_notice").style.textDecoration = "none"
+	}
+	
 	function head_logout_over()
 	{
 		document.getElementById("head_logout").style.textDecoration = "underline"
@@ -76,30 +79,6 @@
 	{
 		document.getElementById("news_feed").style.textDecoration = "none"
 	}
-	function left_timeline_over()
-	{
-		document.getElementById("timeline").style.textDecoration = "underline"
-	}
-	function left_timeline_out()
-	{
-		document.getElementById("timeline").style.textDecoration = "none"
-	}
-	function left_about_over()
-	{
-		document.getElementById("about").style.textDecoration = "underline"
-	}
-	function left_about_out()
-	{
-		document.getElementById("about").style.textDecoration = "none"
-	}
-	function left_photos_over()
-	{
-		document.getElementById("photos").style.textDecoration = "underline"
-	}
-	function left_photos_out()
-	{
-		document.getElementById("photos").style.textDecoration = "none"
-	}
 	function left_group_message_over()
 	{
 		document.getElementById("group_message").style.textDecoration = "underline"
@@ -107,6 +86,22 @@
 	function left_group_message_out()
 	{
 		document.getElementById("group_message").style.textDecoration = "none"
+	}
+	function left_feedback_over()
+	{
+		document.getElementById("feedback").style.textDecoration = "underline"
+	}
+	function left_feedback_out()
+	{
+		document.getElementById("feedback").style.textDecoration = "none"
+	}
+	function left_notice_over()
+	{
+		document.getElementById("notice").style.textDecoration = "underline"
+	}
+	function left_notice_out()
+	{
+		document.getElementById("notice").style.textDecoration = "none"
 	}
 	function left_settings_over()
 	{
@@ -116,4 +111,11 @@
 	{
 		document.getElementById("settings").style.textDecoration = "none"
 	}
-	
+	function left_users_over()
+	{
+		document.getElementById("users").style.textDecoration = "underline"
+	}
+	function left_users_out()
+	{
+		document.getElementById("users").style.textDecoration = "none"
+	}

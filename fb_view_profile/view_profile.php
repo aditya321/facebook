@@ -1,43 +1,21 @@
 <?php
 	session_start();
-	if(isset($_SESSION['fbuser']))
+	if(isset($_SESSION['fbadmin']))
 	{	
 		$v_user_id=$_GET['id'];
-		$user=$_SESSION['fbuser'];
 		mysql_connect("localhost","root","");
 		mysql_select_db("faceback");
-		$query1=mysql_query("select * from users where Email='$user'");
-		$rec1=mysql_fetch_array($query1);
-		$userid=$rec1[0];
 		
-		if($userid!=$v_user_id)
-		{
-			include("background.php");
+		include("background.php");
 ?>
 
 <?php
-	if(isset($_POST['Like']))
+	if(isset($_POST['delete_post']))
 	{
-		$post_id=intval($_POST['postid']);
-		$user_id=intval($_POST['userid']);
-		mysql_query("insert into user_post_status(post_id,user_id,status) values($post_id,$user_id,'Like');");
+		$post_id=intval($_POST['post_id']);
+		mysql_query("delete from user_post where post_id=$post_id;");
 	}
-	if(isset($_POST['Unlike']))
-	{
-		$post_id=intval($_POST['postid']);
-		$user_id=intval($_POST['userid']);
-		mysql_query("delete from user_post_status where post_id=$post_id and  	user_id=$user_id;");
-	}
-	if(isset($_POST['comment']))
-	{
-		$post_id=intval($_POST['postid']);
-		$user_id=intval($_POST['userid']);
-		$txt=$_POST['comment_txt'];
-		if($txt!="")
-		{
-		mysql_query("insert into user_post_comment(post_id,user_id,comment) values($post_id,$user_id,'$txt');");
-		}
-	}
+	
 	if(isset($_POST['delete_comment']))
 	{
 		$comm_id=intval($_POST['comm_id']);
@@ -70,7 +48,7 @@
 <div style="position:absolute;left:37.3%; top:65%;">
 <table cellspacing="0">
 <?php
-	$que_post=mysql_query("select * from user_post where user_id=$v_user_id and priority='Public' order by post_id desc");
+	$que_post=mysql_query("select * from user_post where user_id=$v_user_id order by post_id desc");
 	while($post_data=mysql_fetch_array($que_post))
 	{
 		$postid=$post_data[0];
@@ -87,8 +65,11 @@
 		$user_pic=$fetch_user_pic[2];
 ?>
 	<tr>
-			
-		<td colspan="5" align="right" style="border-top:outset; border-top-width:thin;">&nbsp;  </td>
+			<td colspan="5" align="right" style="border-top:outset; border-top-width:thin;"> 
+			<form method="post">  
+				<input type="hidden" name="post_id" value="<?php echo $postid; ?>" >
+				<input type="submit" name="delete_post" value=" " style="background-color:#FFFFFF; border:#FFFFFF; background-image:url(img/delete_post.gif); width:2.4%;"> 
+			</form> </td>
 			<td>  </td>
 			<td> </td>
 			
@@ -313,37 +294,22 @@
 	<tr style="color:#6D84C4;">
 		<td >   </td>
 		<?php
-		 	$que_status=mysql_query("select * from user_post_status where post_id=$postid and user_id=$userid;");
+		 	$que_status=mysql_query("select * from user_post_status where post_id=$postid and user_id=$v_user_id;");
 			$que_like=mysql_query("select * from user_post_status where post_id=$postid");
 			$count_like=mysql_num_rows($que_like);
 			$status_data=mysql_fetch_array($que_status);
-			if($status_data[3]=="Like")
-			{?>
-			
+			?>
 			<td style="padding-top:15;">
-		<form method="post">
-		<input type="hidden" name="postid" value="<?php echo $postid; ?>">
-		<input type="hidden" name="userid" value="<?php echo $userid; ?>">
-		<input type="submit" value="Unlike" name="Unlike" style="border:#FFFFFF; background:#FFFFFF; font-size:15px; color:#6D84C4;" onMouseOver="unlike_underLine(<?php echo $postid; ?>)" onMouseOut="unlike_NounderLine(<?php echo $postid; ?>)" id="unlike<?php echo $postid; ?>"></form></td>
-			<?php
-			}
-			else
-			{?>
-			<td style="padding-top:15;">
-		<form method="post">
-		<input type="hidden" name="postid" value="<?php echo $postid; ?>">
-		<input type="hidden" name="userid" value="<?php echo $userid; ?>">
-		<input type="submit" value="Like" name="Like" style="border:#FFFFFF; background:#FFFFFF; font-size:15px; color:#6D84C4;" onMouseOver="like_underLine(<?php echo $postid; ?>)" onMouseOut="like_NounderLine(<?php echo $postid; ?>)" id="like<?php echo $postid; ?>"></form></td>
-			<?php
-			}
-		 ?>
+		
+		<input type="button" value="Like" name="Like" style="border:#FFFFFF; background:#FFFFFF; font-size:15px; color:#6D84C4;" onMouseOver="like_underLine(<?php echo $postid; ?>)" onMouseOut="like_NounderLine(<?php echo $postid; ?>)" id="like<?php echo $postid; ?>">
+        	</td>
 		 <?php
 		 
-		 	$que_comment=mysql_query("select * from user_post_comment where post_id =$postid order by comment_id");
+		 	$que_comment=mysql_query("select * from user_post_comment where post_id=$postid order by comment_id");
 	$count_comment=mysql_num_rows($que_comment);
 		 ?>
 		
-		<td colspan="3"> &nbsp; <input type="button" value="Comment(<?php echo $count_comment; ?>)" style="background:#FFFFFF; border:#FFFFFF;font-size:15px; color:#6D84C4;" onClick="Comment_focus(<?php echo $postid; ?>);" onMouseOver="Comment_underLine(<?php echo $postid; ?>)" onMouseOut="Comment_NounderLine(<?php echo $postid; ?>)" id="comment<?php echo $postid; ?>">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <span style="color:#999999;">   <?php echo $post_data[4]; ?> </span> </td>
+		<td colspan="2" style="padding-top:12;"> &nbsp; <input type="button" value="Comment(<?php echo $count_comment; ?>)" style="background:#FFFFFF; border:#FFFFFF;font-size:15px; color:#6D84C4;" onMouseOver="Comment_underLine(<?php echo $postid; ?>)" onMouseOut="Comment_NounderLine(<?php echo $postid; ?>)" id="comment<?php echo $postid; ?>">  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   <span style="color:#999999;">   <?php echo $post_data[4]; ?> </span> </td>
 		<td>   </td>
 	</tr>
 	<tr>
@@ -378,23 +344,14 @@
 		<td> </td>
 		<td width="4%" bgcolor="#EDEFF4" style="padding-left:12;" rowspan="2">  <img src="../../fb_users/<?php echo $user_gender1; ?>/<?php echo $user_Email1; ?>/Profile/<?php echo $user_pic1; ?>" height="40" width="47">    </td>
 		<td bgcolor="#EDEFF4" style="padding-left:7;" > <a href="view_profile.php?id=<?php echo $comment_user_id; ?>" style="text-transform:capitalize; text-decoration:none; color:#3B5998;" onMouseOver="Comment_name_underLine(<?php echo $comment_id; ?>)" onMouseOut="Comment_name_NounderLine(<?php echo $comment_id; ?>)" id="cuname<?php echo $comment_id; ?>"> <?php echo $user_name1; ?></a> </td>
-<?php	
-        if($userid==$comment_user_id)
-		{ ?>
+
 		<td align="right" rowspan="2" bgcolor="#EDEFF4">
 			<form method="post">  
 				<input type="hidden" name="comm_id" value="<?php echo $comment_id; ?>" >
 				<input type="submit" name="delete_comment" value="  " style="background-color:#FFFFFF; border:#FFFFFF; background-image:url(img/delete_comment.gif); width:13; height:13;"> &nbsp;
 			</form> 
         </td>
-		<?php
-		}
-		else
-		{?>
-			<td align="right" rowspan="2" bgcolor="#EDEFF4">  </td>
-		<?php
-		}
-	?>
+		
     </tr>
 <?php
 	$clen=strlen($comment_data[3]);
@@ -600,17 +557,6 @@
 }
 ?>
 
-<tr>
-	<td> </td>
-	<td width="4%" style="padding-left:17;" bgcolor="#EDEFF4" rowspan="2">  <img src="../../fb_users/<?php echo $gender; ?>/<?php echo $user; ?>/Profile/<?php echo $img; ?>" style="height:33; width:33;">    </td>
-		<td bgcolor="#EDEFF4" colspan="2" style="padding-top:15;"> 
-		<form method="post" name="commenting" onSubmit="return blank_comment_check()"> 
-		<input type="text" name="comment_txt" placeholder="Write a comment..." maxlength="420" style="width:440;" id="<?php echo $postid;?>"> 
-		<input type="hidden" name="postid" value="<?php echo $postid; ?>"> 
-		<input type="hidden" name="userid" value="<?php echo $userid; ?>"> 
-		<input type="submit" name="comment" style="display:none;"> 
-		</form> </td>
-	</tr>
 <tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr>
 <?php
 	}
@@ -641,6 +587,7 @@
 	<a href="about.php?id=<?php echo $v_user_id; ?>"> <div style="position:absolute; left:15%; top:65%; background:#F6F7F8; height:6%; width:20%; z-index:-1; box-shadow:0px 0px 5px 0px rgb(0,0,0);" onMouseOver="on_about_bg()"> </div>
 	<div style="display:none;" id="about_on_bg">	
 	<div style="position:absolute; left:15%; top:65%; background:#F9FAFB; height:6%; width:20%; z-index:-1;" onMouseOut="out_about_bg()">  </div>
+	<div style="position:absolute; left:32%; top:66%;"> <img src="img/edit.PNG"> </div>
 	</div>
 	</a>	
 	<div style="position:absolute; left:16%; top:66%;"> <a href="about.php" style="color:#6A7480;text-decoration:none;font-size:17px; font-weight:bold;"> About </a> </div>
@@ -658,29 +605,48 @@
 	$user_info_data=mysql_fetch_array($user_info_query);
 	$city=$user_info_data[3];
 	$hometown=$user_info_data[4];
-	
+	if($city!="")
+	{
 ?>
 		<div style="position:absolute;left:25%; top:87%; font-size:15px; text-transform:capitalize;">  <?php echo $city; ?>  </div>
-
-
+<?php
+	}
+	else
+	{
+    ?>
+	<div style="position:absolute;left:25%; top:87%; font-size:15px;"> <a href="about.php?id=<?php echo $v_user_id; ?>" style="text-decoration:none; color:#3B59B0;"> Add Your City </a> </div>
+	<?php
+	}
+?>
+<?php
+	if($hometown!="")
+	{
+?>
 		<div style="position:absolute;left:23%; top:91%; font-size:15px; text-transform:capitalize;">  <?php echo $hometown; ?>  </div>
-
-
-
+<?php
+	}
+	else
+	{
+    ?>
+		<div style="position:absolute;left:23%; top:91%; font-size:15px;"> <a href="about.php?id=<?php echo $v_user_id; ?>" style="text-decoration:none;color:#3B59B0;"> Add your hometown </a> </div>
+	<?php
+	}
+?>
 
 
 <!-- Photos bg-->
 	<a href="photos.php?id=<?php echo $v_user_id; ?>"> <div style="position:absolute; left:15%; top:100%; background:#F6F7F8; height:6.1%; width:20%; z-index:-1; box-shadow:0px 0px 5px 0px rgb(0,0,0);" onMouseOver="on_photos_bg()"> </div>
 	<div style="display:none;" id="photos_on_bg">	
 	<div style="position:absolute; left:15%; top:100%; background:#F9FAFB; height:6%; width:20%; z-index:-1;" onMouseOut="out_photos_bg()">  </div>
+	<div style="position:absolute; left:32%; top:101%;"> <img src="img/edit.PNG"> </div>
 	</div>
 	</a>	
 	<div style="position:absolute; left:16%; top:101%;"> <a href="photos.php" style="color:#6A7480;text-decoration:none;font-size:17px; font-weight:bold;"> Photos </a> </div>
 	
-	<div style="position:absolute; left:15%; top:106.2%; background:#FFFFFF; height:51.7%; width:20%; z-index:-1; box-shadow:0px 2px 5px 0px rgb(0,0,0);"> </div>	
-
-<?php
-	$que_post_img=mysql_query("select * from user_post where user_id=$v_user_id and post_pic!='' and priority='Public' order by post_id desc");
+	<div style="position:absolute; left:15%; top:106.2%; background:#FFFFFF; height:51.7%; width:20%; z-index:-1; box-shadow:0px 2px 5px 0px rgb(0,0,0);"> </div>
+    
+    <?php
+	$que_post_img=mysql_query("select * from user_post where user_id=$v_user_id and post_pic!='' order by post_id desc");
 	$photos_count=mysql_num_rows($que_post_img);
 	$photos_count=$photos_count+2;
 ?>
@@ -699,18 +665,10 @@
 	<div style="position:absolute; left:28.5%; top:125%;"> <img src="../../fb_users/<?php echo $v_gender; ?>/<?php echo $v_email; ?>/Post/<?php echo $img_array[5] ?>" height="90" width="78">  </div>
 	<div style="position:absolute; left:15.5%; top:142%;"> <img src="../../fb_users/<?php echo $v_gender; ?>/<?php echo $v_email; ?>/Post/<?php echo $img_array[6] ?>" height="90" width="78">  </div>
 	<div style="position:absolute; left:22%; top:142%;"> <img src="../../fb_users/<?php echo $v_gender; ?>/<?php echo $v_email; ?>/Post/<?php echo $img_array[7] ?>" height="90" width="78">  </div>
-	<div style="position:absolute; left:28.5%; top:142%;"> <img src="../../fb_users/<?php echo $v_gender; ?>/<?php echo $v_email; ?>/Post/<?php echo $img_array[8] ?>" height="90" width="78">  </div>
-
+	<div style="position:absolute; left:28.5%; top:142%;"> <img src="../../fb_users/<?php echo $v_gender; ?>/<?php echo $v_email; ?>/Post/<?php echo $img_array[8] ?>" height="90" width="78">  </div>	
 
 </body>
 </html>
-<?php
-}
-else
-{
-	header("location:../fb_profile/Profile.php");
-}
-?>
 
 <?php
 	}

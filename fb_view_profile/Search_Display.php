@@ -4,8 +4,6 @@
 <body>
 <?php
 	$id=$_GET['search_text'];
-	session_start();
-	$user=$_SESSION['fbuser'];
 	mysql_connect("localhost","root","");
 	mysql_select_db("faceback");
 	if($id!='')
@@ -29,32 +27,17 @@
 			 $rec2=mysql_fetch_array($query2);
 			 $img=$rec2[2];
 			 
-			 if($user==$email)
-		 	 {
 ?>
-			<tr onMouseOver="searched_over(<?php echo $uid; ?>)" onMouseOut="searched_out(<?php echo $uid; ?>)">
 			
-			<td bgcolor="#FFFFFF" style="padding-left:5;" id="Photo<?php echo $uid; ?>"> <a href="../fb_profile/Profile.php">  <img src="../../fb_users/<?php echo $gender; ?>/<?php echo $email; ?>/Profile/<?php echo $img; ?>" style="height:70; width:70;"> </a> </td>
-			
-			<td width="500" bgcolor="#FFFFFF" id="Name_bg<?php echo $uid;?>"> <a href="../fb_profile/Profile.php" style=" text-decoration:none; text-transform:capitalize; color:#3B5998;" id="Name_font<?php echo $uid;?>">  <?php echo $name; ?> (Me)</a></td>
-			
-				  
-			</tr>	
-<?php 
-			}
-			else
-			{
-?>
 				<tr onMouseOver="searched_over(<?php echo $uid; ?>)" onMouseOut="searched_out(<?php echo $uid; ?>)">
 			
-			<td bgcolor="#FFFFFF" style="padding-left:5;" id="Photo<?php echo $uid; ?>"> <a href="view_profile.php?id=<?php echo $uid; ?>">  <img src="../../fb_users/<?php echo $gender; ?>/<?php echo $email; ?>/Profile/<?php echo $img; ?>" style="height:70; width:70;"> </a> </td>
+			<td bgcolor="#FFFFFF" style="padding-left:5;" id="Photo<?php echo $uid; ?>"> <a href="../fb_view_profile/view_profile.php?id=<?php echo $uid; ?>">  <img src="../../fb_users/<?php echo $gender; ?>/<?php echo $email; ?>/Profile/<?php echo $img; ?>" style="height:70; width:70;"> </a> </td>
 			
-			<td width="500" bgcolor="#FFFFFF" id="Name_bg<?php echo $uid;?>"> <a href="view_profile.php?id=<?php echo $uid; ?>" style=" text-decoration:none; text-transform:capitalize; color:#3B5998;" id="Name_font<?php echo $uid;?>">  <?php echo $name; ?>  </a></td>
+			<td width="500" bgcolor="#FFFFFF" id="Name_bg<?php echo $uid;?>"> <a href="../fb_view_profile/view_profile.php?id=<?php echo $uid; ?>" style=" text-decoration:none; text-transform:capitalize; color:#3B5998;" id="Name_font<?php echo $uid;?>">  <?php echo $name; ?>  </a></td>
 			
 				  
 			</tr>	
 <?php
-			}
 		}
 ?>
 		<tr>

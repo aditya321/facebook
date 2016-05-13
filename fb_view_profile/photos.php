@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	if(isset($_SESSION['fbuser']))
+	if(isset($_SESSION['fbadmin']))
 	{
 		$v_user_id=$_GET['id'];
 		include("background.php");
@@ -10,7 +10,6 @@
 <title><?php echo $name; ?></title>
 </head>
 <body bgcolor="#E9EAED">
-
 
 <div style="position:absolute;left:30%; display:none;  top:51%; height:9.8%; width:6.9%; background-color:#F6F7F8; z-index:1;" id="timeline_txt_background"> </div>
 <div style="position:absolute;left:31.5%; top:54%; font-weight:bold; z-index:1;"> <a href="view_profile.php?id=<?php echo $v_user_id; ?>" style="text-decoration:none; color:#3B59B0;" onMouseOver="on_timeline_txt();" onMouseOut="out_timeline_txt();">  Timeline </a> </div>
@@ -105,7 +104,7 @@ function close_profile_photo()
 <div style="position:absolute; left:18%; top:85%;"> <img src="img/Go back.png" height="50" width="50" onClick="back()"> </div>
 </div>
 
-<!--timeline_photos_album bg-->
+<!--timeline_photos_album-->
 <div style="display:none;" id="timeline_photos_album">
 <div style="position:absolute;left:15%; top:80%; height:1<?php echo $photos_count-2; ?>0%; width:70%; background:#FFF; box-shadow:0px -1px 5px 1px rgb(0,0,0); z-index:-1;">
 </div>
@@ -138,7 +137,7 @@ function close_timeline_album_photo()
 <tr>
 <?php
 	$tr=0;
-	$que_post_img=mysql_query("select * from user_post where user_id=$v_user_id and post_pic!=''and priority='Public' order by post_id desc");
+	$que_post_img=mysql_query("select * from user_post where user_id=$v_user_id and post_pic!='' order by post_id desc");
 	
 	while($post_img_data=mysql_fetch_array($que_post_img))
 	{

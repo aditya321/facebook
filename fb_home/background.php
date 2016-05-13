@@ -1,12 +1,12 @@
 <html>
 <head>
+	<link href="../fb_font/font.css" rel="stylesheet" type="text/css">
+	<LINK REL="SHORTCUT ICON" HREF="../img/Faceback.ico" />
 	<script src="background_file/background_js/event.js"></script>
 	<script src="background_file/background_js/searching.js"></script>
 	<script src="background_file/background_js/searched_reco_event.js">
 	</script>
 	<script src="background_file/background_js/submited_searched_reco_event.js"></script>
-    <link href="../fb_font/font.css" rel="stylesheet" type="text/css">
-    <LINK REL="SHORTCUT ICON" HREF="../fb_title_icon/Faceback.ico" />
 </head>
 <body>
 
@@ -44,34 +44,22 @@
 </form>
 
 
-<?php
-		$user=$_SESSION['fbuser'];
-		mysql_connect("localhost","root","");
-		mysql_select_db("faceback");
-		$query1=mysql_query("select * from users where Email='$user'");
-		$rec1=mysql_fetch_array($query1);
-		$userid=$rec1[0];
-		$query2=mysql_query("select * from user_profile_pic where user_id=$userid");
-		$rec2=mysql_fetch_array($query2);
-		
-		$name=$rec1[1];
-		$gender=$rec1[4];
-		$img=$rec2[2];
-?>
+
 	
-<div style="position:fixed; left:71.8%; top:0.6%; z-index:1;">
+<div style="position:fixed; left:90%; top:0.6%; z-index:1;">
 	<table cellspacing="0">
 	<tr id="hedarname2">
 	
-		<td style="padding-left:7;" id="head_img" onMouseOver="head_pro_pic_over()" onMouseOut="head_pro_pic_out()"> <a href="../fb_profile/Profile.php">  <img src="../../fb_users/<?php echo $gender; ?>/<?php echo $user; ?>/Profile/<?php echo $img; ?>" style="height:27; width:25;"> </a> </td>
+		<td style="padding-left:7;" id="head_img" onMouseOver="head_pro_pic_over()" onMouseOut="head_pro_pic_out()"> <a href="Home.php">  <img src="img/admin.png" style="height:27; width:25;"> </a>  </td>
 		
-		<td id="head_name_bg" onMouseOver="head_pro_pic_over()" onMouseOut="head_pro_pic_out()"> <a href="../fb_profile/Profile.php" id="head_name_font" style="color:#DEDEEF; font-size:12; font-weight:900;font-family:lucida Bright; text-transform:capitalize; text-decoration:none;"> &nbsp;  <?php echo $name; ?> &nbsp;</a> </td>
-		<td style="color:#DEDEEF;"> | </td>
-		<td id="head_home_bg" onMouseOver="head_home_over()" onMouseOut="head_home_out()"> <a href="Home.php" id="head_home_font" style="color:#DEDEEF; font-size:12; font-weight:900;font-family:lucida Bright; text-decoration:none;"> &nbsp; Home &nbsp; </a> </td>
-        <td style="color:#DEDEEF;">|</td>
+		<td id="head_name_bg"  onMouseOver="head_pro_pic_over()" onMouseOut="head_pro_pic_out()"> <a href="Home.php" id="head_name_font" style="color:#DEDEEF; font-size:12; font-weight:900;font-family:lucida Bright; text-transform:capitalize; text-decoration:none;"> &nbsp;  Admin &nbsp;</a> </td>
+		
+	
 	</tr>
 	</table>
 </div>
+
+
 
 <!--fb option-->
 <script src="background_file/background_js/options.js"></script>
@@ -84,24 +72,21 @@
 
         <div style="position:fixed; left:85%; top:6%; z-index:3; background:#FFF; height:32%; width:14.8%; box-shadow:0px 2px 10px 1px rgb(0,0,0);"> </div>
         
-         <div style="position:fixed; left:86%; top:8.5%; z-index:3;">
-        <a href="../fb_profile/Profile.php"> <img src="img/timeline.png" width="16" height="16" onMouseOver="head_timeline_over()" onMouseOut="head_timeline_out()"></a>
+         <div style="position:fixed; left:85.8%; top:7.8%; z-index:3;">
+        <a href="Home.php"> <img src="img/News_Feed.PNG"  onMouseOver="head_new_over()" onMouseOut="head_new_out()"></a>
         </div>
         <div style="position:fixed; left:88%; top:5%; z-index:3;">
-                 <a href="../fb_profile/Profile.php" style="text-decoration:none; color:#000;" id="head_timeline" onMouseOver="head_timeline_over()" onMouseOut="head_timeline_out()" ><h4>Timeline</h4></a> 
-        </div>
-        <div style="position:fixed; left:86%; top:13.5%; z-index:3;">
-             <a href="../fb_profile/about.php"> <img src="img/about.png" onMouseOver="head_about_over()" onMouseOut="head_about_out()"> </a>
-        </div> 
-        <div style="position:fixed; left:88%; top:10%; z-index:3;">
-                <a href="../fb_profile/about.php" style="text-decoration:none; color:#000;" id="head_about" onMouseOver="head_about_over()" onMouseOut="head_about_out()"><h4>About</h4></a> 
+                 <a href="Home.php" style="text-decoration:none; color:#000;" id="head_new" onMouseOver="head_new_over()" onMouseOut="head_new_out()" ><h4>News Feed</h4></a> 
         </div>
         
-        <div style="position:fixed; left:85.8%; top:18%; z-index:3;"> <a href="../fb_profile/photos.php"> <img src="img/photo&video.PNG" onMouseOver="head_photos_over()" onMouseOut="head_photos_out()"> </a> </div>
-<div style="position:fixed; left:88.2%; top:15%; z-index:3;"><a href="../fb_profile/photos.php" style="text-decoration:none; color:#000;" id="head_photos" onMouseOver="head_photos_over()" onMouseOut="head_photos_out()"><h4>Photos</h4></a></div>
+	<div style="position:fixed; left:86%; top:13%; z-index:3;"> <a href="Settings.php"> <img src="img/settings2.png" height="25" width="23" onMouseOver="head_settings_over()" onMouseOut="head_settings_out()"> </a> </div>
+<div style="position:fixed; left:88.2%; top:10%; z-index:3;"><a href="Settings.php" style="text-decoration:none; color:#000;" id="head_settings" onMouseOver="head_settings_over()" onMouseOut="head_settings_out()"><h4> Account Settings </h4></a></div>
 
-	<div style="position:fixed; left:85.8%; top:23%; z-index:3;"> <a href="Settings.php"> <img src="img/settings2.png" height="25" width="23" onMouseOver="head_settings_over()" onMouseOut="head_settings_out()"> </a> </div>
-<div style="position:fixed; left:88.2%; top:20%; z-index:3;"><a href="Settings.php" style="text-decoration:none; color:#000;" id="head_settings" onMouseOver="head_settings_over()" onMouseOut="head_settings_out()"><h4> Account Settings </h4></a></div>
+	<div style="position:fixed; left:86%; top:17.8%; z-index:3;"> <a href="Group_Message.php"> <img src="img/group.png" height="25" width="23" onMouseOver="head_g_chat_over()" onMouseOut="head_g_chat_out()"> </a> </div>
+<div style="position:fixed; left:88.2%; top:15%; z-index:3;"><a href="Group_Message.php" style="text-decoration:none; color:#000;" id="head_g_chat" onMouseOver="head_g_chat_over()" onMouseOut="head_g_chat_out()"><h4> Group Chat </h4></a></div>
+
+	<div style="position:fixed; left:86%; top:22.8%; z-index:3;"> <a href="Notice.php"> <img src="img/Notice.png" height="25" width="23" onMouseOver="head_notice_over()" onMouseOut="head_notice_out()"> </a> </div>
+<div style="position:fixed; left:88.2%; top:20%; z-index:3;"><a href="Notice.php" style="text-decoration:none; color:#000;" id="head_notice" onMouseOver="head_notice_over()" onMouseOut="head_notice_out()"><h4> Notice </h4></a></div>
 
 <div style="position:fixed; left:86.1%; top:27.5%; z-index:3;"> <a href="feedback.php"> <img src="background_file/background_icons/icon-feedback.png" height="20" width="20" onMouseOver="head_feedback_over()" onMouseOut="head_feedback_out()"> </a> </div>
 <div style="position:fixed; left:88.3%; top:24.5%; z-index:3;"><a href="feedback.php" style="text-decoration:none; color:#000;" id="head_feedback" onMouseOver="head_feedback_over()" onMouseOut="head_feedback_out()"><h4> Feedback </h4></a></div>
@@ -109,51 +94,44 @@
 <div style="position:fixed; left:86%; top:32.5%; z-index:3;"> <a href="../fb_logout/logout.php"> <img src="background_file/background_icons/logout.png" height="20" width="20"  onMouseOver="head_logout_over()" onMouseOut="head_logout_out()"> </a> </div>
 <div style="position:fixed; left:88.3%; top:29.1%; z-index:3;"><a href="../fb_logout/logout.php" style="text-decoration:none; color:#000;" id="head_logout" onMouseOver="head_logout_over()" onMouseOut="head_logout_out()"><h4> Logout </h4></a></div>
 </div>
-           
-        
-        
-        
-        
+
+
+		
 		
 <!--left part-->
 <div style="position:fixed; left:1.2%; top:16.5%; z-index:1;">
 	<table border="0">
 	<tr>
-		<td> <a href="../fb_profile/Profile.php"> <img src="../../fb_users/<?php echo $gender; ?>/<?php echo $user; ?>/Profile/<?php echo $img; ?>" style="height:70; width:70;"> </a> </td>
-		<td> &nbsp; <a href="../fb_profile/Profile.php" onMouseOver="left_name_over()" onMouseOut="left_name_out()" style="color:#000000; font-size:12; font-weight:900;font-family:lucida Bright; text-transform:capitalize; text-decoration:none;" id="left_name">   <?php echo $name; ?> </a> </td>
+		<td> <a href="Home.php">  <img src="img/admin.png" style="height:70; width:70;"> </a>  </td>
+		<td> &nbsp; <a href="Home.php" onMouseOver="left_name_over()" onMouseOut="left_name_out()" style="color:#000000; font-size:12; font-weight:900;font-family:lucida Bright; text-transform:capitalize; text-decoration:none;" id="left_name">  Admin </a>   </td>
 	</tr>
 	</table>
 </div>
 
+
 <div style="position:fixed; left:7%; top:35.7%;"> <a href="Home.php"> <img src="img/News_Feed.PNG" onMouseOver="left_news_feed_over()" onMouseOut="left_news_feed_out()"> </a> </div>
 <div style="position:fixed; left:9%; top:33%;"> <a href="Home.php" style="text-decoration:none; color:#000;" id="news_feed" onMouseOver="left_news_feed_over()" onMouseOut="left_news_feed_out()"> <h4>News Feed</h4> </a></div>
 
+<div style="position:fixed; left:7%; top:40.2%;"> <a href="Group_Message.php"> <img src="img/group.png" height="25" width="23" onMouseOver="left_group_message_over()" onMouseOut="left_group_message_out()"> </a> </div>
+<div style="position:fixed; left:9%; top:37%;"><a href="Group_Message.php" style="text-decoration:none; color:#000;" id="group_message" onMouseOver="left_group_message_over()" onMouseOut="left_group_message_out()"><h4>Group Chat</h4></a></div>
 
+<div style="position:fixed; left:7.3%; top:44.7%;"> <a href="feedback.php"> <img src="img/icon-feedback.png" height="25" width="23" onMouseOver="left_feedback_over()" onMouseOut="left_feedback_out()"> </a> </div>
+<div style="position:fixed; left:9%; top:41.7%;"><a href="feedback.php" style="text-decoration:none; color:#000;" id="feedback" onMouseOver="left_feedback_over()" onMouseOut="left_feedback_out()"><h4>Feedback</h4></a></div>
 
-<div style="position:fixed; left:7.3%; top:40.6%;"> <a href="../fb_profile/Profile.php"> <img src="img/timeline.png" width="16" height="16" onMouseOver="left_timeline_over()" onMouseOut="left_timeline_out()"> </a> </div>
-<div style="position:fixed; left:9%; top:37.2%;"><a href="../fb_profile/Profile.php" style="text-decoration:none; color:#000;" id="timeline" onMouseOver="left_timeline_over()" onMouseOut="left_timeline_out()" ><h4>Timeline</h4></a></div>
+<div style="position:fixed; left:7.2%; top:49.2%;"> <a href="Notice.php"> <img src="img/Notice.png" height="25" width="20" onMouseOver="left_notice_over()" onMouseOut="left_notice_out()"> </a> </div>
+<div style="position:fixed; left:9%; top:46%;"><a href="Notice.php" style="text-decoration:none; color:#000;" id="notice" onMouseOver="left_notice_over()" onMouseOut="left_notice_out()"><h4>Notice</h4></a></div>
 
+<div style="position:fixed; left:7%; top:53.7%;"> <a href="Settings.php"> <img src="img/settings2.png" height="25" width="23" onMouseOver="left_settings_over()" onMouseOut="left_settings_out()"> </a> </div>
+<div style="position:fixed; left:9%; top:50.7%;"><a href="Settings.php" style="text-decoration:none; color:#000;" id="settings" onMouseOver="left_settings_over()" onMouseOut="left_settings_out()"><h4>Settings</h4></a></div>
 
-
-<div style="position:fixed; left:7.2%; top:45.3%;"><a href="../fb_profile/about.php"> <img src="img/about.png" onMouseOver="left_about_over()" onMouseOut="left_about_out()"> </a> </div>
-<div style="position:fixed; left:9%; top:41.8%;"><a href="../fb_profile/about.php" style="text-decoration:none; color:#000;" id="about" onMouseOver="left_about_over()" onMouseOut="left_about_out()"><h4>About</h4></a></div>
-
-
-
-<div style="position:fixed; left:7%; top:49.3%;"> <a href="../fb_profile/photos.php"> <img src="img/photo&video.PNG" onMouseOver="left_photos_over()" onMouseOut="left_photos_out()"> </a> </div>
-<div style="position:fixed; left:9%; top:46%;"><a href="../fb_profile/photos.php" style="text-decoration:none; color:#000;" id="photos" onMouseOver="left_photos_over()" onMouseOut="left_photos_out()"><h4>Photos</h4></a></div>
-
-<div style="position:fixed; left:7%; top:53.2%;"> <a href="Group_Message.php"> <img src="img/group.png" height="25" width="23" onMouseOver="left_group_message_over()" onMouseOut="left_group_message_out()"> </a> </div>
-<div style="position:fixed; left:9%; top:50%;"><a href="Group_Message.php" style="text-decoration:none; color:#000;" id="group_message" onMouseOver="left_group_message_over()" onMouseOut="left_group_message_out()"><h4>Group Chat</h4></a></div>
-
-<div style="position:fixed; left:7%; top:57.6%;"> <a href="Settings.php"> <img src="img/settings2.png" height="25" width="23" onMouseOver="left_settings_over()" onMouseOut="left_settings_out()"> </a> </div>
-<div style="position:fixed; left:9%; top:54.2%;"><a href="Settings.php" style="text-decoration:none; color:#000;" id="settings" onMouseOver="left_settings_over()" onMouseOut="left_settings_out()"><h4>Settings</h4></a></div>
+<div style="position:fixed; left:7%; top:58%;"> <a href="users.php"> <img src="img/all_users.png" height="25" width="23" onMouseOver="left_users_over()" onMouseOut="left_users_out()"> </a> </div>
+<div style="position:fixed; left:9%; top:55%;"><a href="users.php" style="text-decoration:none; color:#000;" id="users" onMouseOver="left_users_over()" onMouseOut="left_users_out()"><h4>All Users</h4></a></div>
 
 
 <!--left hr-->
-<hr style="position:fixed;left:18%;top:4.8%;height:100%;width:0; border-color:#CCCCCC; box-shadow:-5px 0px 5px 0px rgb(0,0,0);">
+<hr style="position:fixed;left:18%;top:4.8%;height:99%;width:0; border-color:#CCCCCC; box-shadow:-5px 0px 5px 0px rgb(0,0,0);">
 <!--right hr-->
-<hr style="position:fixed;left:82%;top:4.8%;height:100%;width:0; border-color:#CCCCCC; box-shadow:5px 0px 5px 0px rgb(0,0,0);">
+<hr style="position:fixed;left:82%;top:4.8%;height:99%;width:0; border-color:#CCCCCC; box-shadow:5px 0px 5px 0px rgb(0,0,0);">
 
 
 <!--Online-->
@@ -179,9 +157,11 @@
 <div style="position:fixed; left:84%; top:6%; background-color:#000000; opacity:0.5; height:89.2%; width:16%;"></div>
 
 <?php
+	mysql_connect("localhost","root","");
+	mysql_select_db("faceback");
+	
 	 $query_online=mysql_query("select * from user_status where status='Online'");
 	 $online_count=mysql_num_rows($query_online);
-	 $online_count=$online_count-1;
 	 
 	 if($online_count==0)
 	 {
@@ -211,8 +191,7 @@
 		
 
   	
-	 if($user!=$online_user_Email)
-     {
+	
 ?>
 			 <tr>
 			   	   <td> <a href="../fb_view_profile/view_profile.php?id=<?php echo $online_user_id; ?>"> <img src="../../fb_users/<?php echo $online_user_gender; ?>/<?php echo $online_user_Email; ?>/Profile/<?php echo $online_user_pic; ?>" height="30" width="30"> </a> </td>
@@ -220,7 +199,7 @@
 				   <td><img src="background_file/background_icons/online_symbol.png"  /></td>   
 			 </tr>
  <?php	            
-	  }
+	 
 	}
 ?>
 </table>

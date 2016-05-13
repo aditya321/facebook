@@ -23,16 +23,7 @@ function head_pro_pic_out()
 	document.getElementById("head_name_bg").bgColor = "#3B5998";
 	document.getElementById("head_name_font").style.color = "#DEDEEF";	
 }
-function head_home_over()
-{
-	document.getElementById("head_home_bg").bgColor = "#4A63A5";
-	document.getElementById("head_home_font").style.color = "#FFFFFF";
-}
-function head_home_out()
-{
-	document.getElementById("head_home_bg").bgColor = "#3B5998";
-	document.getElementById("head_home_font").style.color = "#DEDEEF";	
-}
+
 
 // Left name
 function left_name_over()
